@@ -1,0 +1,26 @@
+{# This template should form the frame of the site, all templates should extend it #}
+{% extends "base.tmpl" %}
+
+{% block _title %}My Example Project - Django Boilerplate{% endblock %}
+{% block _js %}{% endblock %}
+{% block _css %}{% endblock %}
+{% block _keywords %}Example Project{% endblock %}
+{% block _description %}Example Project{% endblock %}
+
+{% block page %}
+	<header>
+		{% block header %}{% endblock %}
+	</header>
+	<nav>
+		{% block navigation %}{% endblock %}
+	</nav>
+	<article>
+		{% block column1 %}{% endblock %}
+	</article>
+	<aside>
+		{% block column2 %}{% endblock %}
+	</aside>
+	<footer>
+		{% block footer %}{% endblock %}
+	</footer>
+{% endblock %}
