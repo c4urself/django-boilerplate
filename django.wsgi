@@ -2,8 +2,8 @@ import sys
 import os
 import site
 
-PROJECT_NAME = 'compass'
-TLD = 'nl'
+PROJECT_NAME = 'testproject'
+TLD = 'com'
 PYTHON_VERSION = '2.6'
 
 # set old sys.path

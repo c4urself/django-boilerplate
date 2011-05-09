@@ -21,7 +21,35 @@ STATICFILES_DIRS = (
 )
 
 #DEBUG
+from sentry.client.handlers import SentryHandler
+
 PATH_TO_DEBUG_LOG = os.path.join(PROJECT_ROOT, 'logs', 'debug.log' )
+LOGGER = logging.getLogger()
+
+# Create the handler and set format for FILE HANDLER
+FILE_HANDLER = logging.FileHandler(PATH_TO_DEBUG_LOG)
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+FILE_HANDLER.setFormatter(formatter)
+
+if SentryHandler not in map(lambda x: x.__class__, LOGGER.handlers):
+    SENTRY_HANDLER = SentryHandler()
+    LOGGER.addHandler(SENTRY_HANDLER)
+    
+    # Add StreamHandler to sentry's default so you can catch missed exceptions
+    sentry_logger = logging.getLogger('sentry.errors')
+    sentry_logger.propagate = False
+    sentry_logger.addHandler(logging.StreamHandler())
+
+if not DEBUG:
+    LDAP_LOGGER.addHandler(SENTRY_HANDLER)
+    LOGGER.addHandler(SENTRY_HANDLER)
+else:
+    LDAP_LOGGER.addHandler(FILE_HANDLER)
+    LOGGER.addHandler(FILE_HANDLER)
+
+
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ADMINS = (
@@ -32,10 +60,10 @@ MANAGERS = ADMINS
 #DATABASES
 DATABASES = {
     'default': {
-        'ENGINE':   'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE':   'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME':     '',                         # Or path to database file if using sqlite3.
         'USER':     '',                         # Not used with sqlite3.
-        'PASSWORD': 'joopiedepopie',            # Not used with sqlite3.
+        'PASSWORD': '',            # Not used with sqlite3.
         'HOST':     '',                         # Set to empty string for localhost. Not used with sqlite3.
         'PORT':     '',                         # Set to empty string for default. Not used with sqlite3.
     }
@@ -102,5 +130,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     
-    'example.main',
+    'example.glue',
+    
+    'django_extensions',
+    'sentry',
+    'south',
+    'sorl.thumbnail',
 )

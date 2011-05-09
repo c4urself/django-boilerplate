@@ -1,15 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
+{% extends "admin/base.html" %}
+{% load i18n %}
 
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>base_site</title>
-	<meta name="generator" content="TextMate http://macromates.com/">
-	<meta name="author" content="Christian Verkerk">
-	<!-- Date: 2011-04-01 -->
-</head>
-<body>
+{% block title %}{{ title }} | {% trans 'Django Boilerplate' %}{% endblock %}
 
-</body>
-</html>
+{% block branding %}
+    <h1 id="site-name">{% trans 'Django Boilerplate' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -4,7 +4,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^changer/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^sentry/', include('sentry.urls')),
 )
 
 urlpatterns += patterns('django.views.generic',

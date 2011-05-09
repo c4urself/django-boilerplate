@@ -5,7 +5,7 @@ from fabric.api import run, env, local, hosts, roles, cd, sudo
 WWW_DIR_PATH = '~/Sites/'
 SITE_NAME = 'testproject'
 SITE_EXTENSION = 'nl'
-SVN_SERVER = 'https://svn.mychanger.net/'
+SVN_SERVER = ''
 SVN_REPO = '%s/%s/trunk' %(SVN_SERVER, SITE_NAME)
 
 env.roledefs = {
